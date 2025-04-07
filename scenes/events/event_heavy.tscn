@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://clkuhhyqppfia"]
+
+[ext_resource type="Texture2D" uid="uid://dvpvnbmuwtx80" path="res://assets/events/event_heavy.png" id="1_ufv5a"]
+[ext_resource type="Script" uid="uid://dk4r7hidi1f1b" path="res://scenes/events/scripts/event_heavy.gd" id="2_ufv5a"]
+[ext_resource type="Texture2D" uid="uid://c1jdp6dqvd1dp" path="res://assets/events/event_base.png" id="3_vjii7"]
+[ext_resource type="PackedScene" uid="uid://7oddtca3vwkj" path="res://scenes/button.tscn" id="4_uybmn"]
+
+[node name="Event" type="Sprite2D"]
+texture = ExtResource("1_ufv5a")
+centered = false
+script = ExtResource("2_ufv5a")
+metadata/_edit_lock_ = true
+
+[node name="EventTable" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_vjii7")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer"]
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 607.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 42
+text = "Steel bug"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 488.0
+offset_bottom = 519.0
+theme_override_colors/font_color = Color(0.683077, 0.683077, 0.683077, 1)
+theme_override_font_sizes/font_size = 24
+text = "He looks very heavy. I think this elevator could not handle this weight. He really want to come in."
+autowrap_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 611.0
+offset_right = 527.0
+offset_bottom = 613.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 637.0
+offset_right = 376.0
+offset_bottom = 747.0
+
+[node name="Button" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_uybmn")]
+layout_mode = 2
+text = "Let him in"
+
+[node name="Button2" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_uybmn")]
+layout_mode = 2
+text = "Try to explain that there is no 
+ㅤ more space for him (50% success)"
+
+[node name="Button4" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_uybmn")]
+layout_mode = 2
+disabled = true
+text = "Bribe him with cookies"
+
+[node name="Button3" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_uybmn")]
+layout_mode = 2
+disabled = true
+text = "Threaten him with a knife (70% success)"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

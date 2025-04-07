@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://18tjwq6gw482"]
+
+[ext_resource type="Script" uid="uid://c58062a78coca" path="res://scripts/spawntext.gd" id="1_kesf8"]
+
+[node name="Text" type="Label"]
+offset_right = 137.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 22
+text = "aaaaaaaaa!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("1_kesf8")

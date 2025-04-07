@@ -1,0 +1,162 @@
+[gd_scene load_steps=15 format=3 uid="uid://5ex0a8wlrmdp"]
+
+[ext_resource type="Script" uid="uid://exg6vkl5scwi" path="res://scripts/main.gd" id="1_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://ou8xw01qd6i8" path="res://assets/door.png" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://c1rt3ptablmyn" path="res://assets/elevator.png" id="3_tefeu"]
+[ext_resource type="PackedScene" uid="uid://ds2nfhxgf8ekn" path="res://scenes/events/event_base.tscn" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://dffmi3dbiufvf" path="res://assets/button_enabled.png" id="4_tipki"]
+[ext_resource type="Texture2D" uid="uid://crpku6n4hlln7" path="res://assets/events/event_22.png" id="4_trceg"]
+[ext_resource type="Texture2D" uid="uid://d28ft8jtmtobr" path="res://assets/button_disabled.png" id="5_85g3d"]
+[ext_resource type="Texture2D" uid="uid://btjs8qcg20gok" path="res://assets/button_select.png" id="5_choun"]
+[ext_resource type="AudioStream" uid="uid://cqh72u8babflm" path="res://assets/elevator.mp3" id="5_tbgi4"]
+[ext_resource type="AudioStream" uid="uid://whjfsh0vhxfw" path="res://assets/door_open.mp3" id="8_choun"]
+[ext_resource type="AudioStream" uid="uid://c6twgnlxph132" path="res://assets/main song.mp3" id="10_choun"]
+[ext_resource type="AudioStream" uid="uid://bkduafrt4p7v1" path="res://assets/start.mp3" id="10_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://dclalpb7rd1kb" path="res://assets/leave.png" id="12_eb6dy"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ya4ey"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_choun")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_jyhfs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, 44)
+anchor_mode = 0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -357.0
+offset_top = 1058.0
+offset_right = 2374.0
+offset_bottom = 1767.0
+color = Color(0, 0, 0, 1)
+
+[node name="leftDoor" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(768, 328)
+texture = ExtResource("2_tbgi4")
+offset = Vector2(96, 224)
+
+[node name="rightDoor" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1152, 328)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_tbgi4")
+offset = Vector2(96, 224)
+
+[node name="Elevator" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(960, 540)
+texture = ExtResource("3_tefeu")
+metadata/_edit_lock_ = true
+
+[node name="22" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+texture = ExtResource("4_trceg")
+metadata/_edit_lock_ = true
+
+[node name="bombom" type="Sprite2D" parent="22"]
+z_index = -1
+position = Vector2(0, 44)
+texture = ExtResource("4_trceg")
+
+[node name="Floor" type="Label" parent="."]
+offset_left = 1268.0
+offset_top = 343.0
+offset_right = 1309.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0.971207, 0.857456, 0.40913, 1)
+theme_override_font_sizes/font_size = 41
+text = "0"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = 1255.0
+offset_top = 324.0
+offset_right = 1385.0
+offset_bottom = 410.0
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="TextureButton" parent="."]
+offset_left = 1244.0
+offset_top = 487.0
+offset_right = 1393.0
+offset_bottom = 562.0
+disabled = true
+texture_normal = ExtResource("4_tipki")
+texture_hover = ExtResource("5_choun")
+texture_disabled = ExtResource("5_85g3d")
+
+[node name="Event" type="Node2D" parent="."]
+z_index = -5
+
+[node name="Event" parent="Event" instance=ExtResource("4_jyhfs")]
+
+[node name="DoorSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ya4ey")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tbgi4")
+volume_db = -1.874
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ya4ey")
+volume_db = -1.874
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_choun")
+volume_db = -10.306
+autoplay = true
+parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ItemCount" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 936.0
+offset_top = 1016.0
+offset_right = 987.0
+offset_bottom = 1062.0
+theme_override_font_sizes/font_size = 26
+text = "1/4"
+horizontal_alignment = 1
+
+[node name="Items" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 830.0
+offset_top = 936.0
+offset_right = 1098.0
+offset_bottom = 1000.0
+alignment = 1
+
+[node name="Leave" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(1257.75, 666.75)
+scale = Vector2(0.63913, 0.621827)
+texture = ExtResource("12_eb6dy")
+
+[node name="Label" type="Label" parent="CanvasLayer/Leave"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = 156.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "I'm leaving."
+
+[node name="Ending" type="CanvasLayer" parent="."]
+layer = 5
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="Ending"]
+offset_left = -154.0
+offset_top = -157.0
+offset_right = 2125.0
+offset_bottom = 1215.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

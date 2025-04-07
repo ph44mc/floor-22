@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtnbh0thbxndv"]
+
+[ext_resource type="Texture2D" uid="uid://d0mso8ihlr5ux" path="res://assets/events/event_blackhole.png" id="1_w4pp6"]
+[ext_resource type="Script" uid="uid://dvlfthq5sae5m" path="res://scenes/events/scripts/event_blackhole.gd" id="2_jnayn"]
+[ext_resource type="Texture2D" uid="uid://dehvo713phl1y" path="res://assets/progressbar.png" id="3_jnayn"]
+[ext_resource type="PackedScene" uid="uid://7oddtca3vwkj" path="res://scenes/button.tscn" id="4_wcm0e"]
+
+[node name="Event" type="Sprite2D"]
+texture = ExtResource("1_w4pp6")
+centered = false
+script = ExtResource("2_jnayn")
+doOpenDoors = false
+canLeave = false
+metadata/_edit_lock_ = true
+
+[node name="EventTable" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_w4pp6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer"]
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 607.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 42
+text = "BLACK HOLE"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 488.0
+offset_bottom = 519.0
+theme_override_colors/font_color = Color(0.683077, 0.683077, 0.683077, 1)
+theme_override_font_sizes/font_size = 24
+text = "Hold on tight! 
+"
+autowrap_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 576.0
+offset_right = 527.0
+offset_bottom = 578.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/CanvasGroup"]
+visible = false
+offset_left = 1583.0
+offset_top = 564.0
+offset_right = 1711.0
+offset_bottom = 692.0
+scale = Vector2(1.6303, 1.6303)
+value = 99.0
+allow_greater = true
+allow_lesser = true
+fill_mode = 3
+texture_progress = ExtResource("3_jnayn")
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasGroup/TextureProgressBar"]
+layout_mode = 0
+offset_left = 41.7101
+offset_top = 46.6172
+offset_right = 98.7101
+offset_bottom = 90.6172
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "You"
+
+[node name="ButtonBH" type="Button" parent="CanvasLayer/CanvasGroup"]
+visible = false
+z_index = 6
+offset_left = -91.0
+offset_top = -83.0
+offset_right = 2096.0
+offset_bottom = 1162.0
+focus_mode = 0
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 602.0
+offset_right = 376.0
+offset_bottom = 712.0
+
+[node name="Button" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_wcm0e")]
+layout_mode = 2
+text = "Ready"
+
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/ButtonBH" to="." method="_on_button_bh_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button" to="." method="_on_button_pressed"]

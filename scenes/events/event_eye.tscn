@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbkid5o77dm7f"]
+
+[ext_resource type="Texture2D" uid="uid://dkdp0k0cxx5wk" path="res://assets/events/event_eye.png" id="1_r5gx1"]
+[ext_resource type="Script" uid="uid://bbtck5l04ak0p" path="res://scenes/events/scripts/event_eye.gd" id="2_hx42y"]
+[ext_resource type="Texture2D" uid="uid://2qwa85asexf" path="res://assets/events/event_eye2.png" id="3_rettt"]
+[ext_resource type="Texture2D" uid="uid://byvgpbp2jsaw" path="res://assets/events/eye.png" id="4_hx42y"]
+[ext_resource type="PackedScene" uid="uid://7oddtca3vwkj" path="res://scenes/button.tscn" id="4_wuc4f"]
+
+[node name="Event" type="Sprite2D"]
+texture = ExtResource("1_r5gx1")
+centered = false
+script = ExtResource("2_hx42y")
+canLeave = false
+metadata/_edit_lock_ = true
+
+[node name="Eye" type="Sprite2D" parent="."]
+position = Vector2(992, 596)
+texture = ExtResource("4_hx42y")
+
+[node name="EventTable" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_rettt")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer"]
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 607.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 42
+text = "Seeking eye"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 488.0
+offset_bottom = 519.0
+theme_override_colors/font_color = Color(0.683077, 0.683077, 0.683077, 1)
+theme_override_font_sizes/font_size = 24
+text = "Do something, or you are screwed."
+autowrap_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 536.0
+offset_right = 527.0
+offset_bottom = 538.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 562.0
+offset_right = 376.0
+offset_bottom = 672.0
+
+[node name="Button3" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_wuc4f")]
+layout_mode = 2
+disabled = true
+text = "Attack eye with knife"
+
+[node name="Button4" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_wuc4f")]
+layout_mode = 2
+disabled = true
+text = "Throw sand from vase into eye"
+
+[node name="Button" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_wuc4f")]
+layout_mode = 2
+text = "Stand still (%s success)"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer2"]
+
+[node name="Label" type="Label" parent="CanvasLayer2/CanvasGroup"]
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 607.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 42
+text = "Unfortunately..."
+
+[node name="Label2" type="Label" parent="CanvasLayer2/CanvasGroup"]
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 488.0
+offset_bottom = 519.0
+theme_override_colors/font_color = Color(0.683077, 0.683077, 0.683077, 1)
+theme_override_font_sizes/font_size = 24
+text = "You tried to remain unnoticed, but it didn't work out."
+autowrap_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/CanvasGroup"]
+offset_left = 128.0
+offset_top = 536.0
+offset_right = 527.0
+offset_bottom = 538.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/CanvasGroup"]
+offset_left = 128.0
+offset_top = 562.0
+offset_right = 376.0
+offset_bottom = 672.0
+
+[node name="Button2" parent="CanvasLayer2/CanvasGroup/VBoxContainer" instance=ExtResource("4_wuc4f")]
+layout_mode = 2
+text = "Proceed"
+
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer2/CanvasGroup/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

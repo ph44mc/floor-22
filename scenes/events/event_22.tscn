@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://oawo5g3rxbak"]
+
+[ext_resource type="Texture2D" uid="uid://crpku6n4hlln7" path="res://assets/events/event_22.png" id="1_wr5km"]
+[ext_resource type="Script" uid="uid://bdgcr31l0kmml" path="res://scenes/events/scripts/event_22.gd" id="2_wr5km"]
+[ext_resource type="PackedScene" uid="uid://7oddtca3vwkj" path="res://scenes/button.tscn" id="3_7hn8h"]
+
+[node name="Event" type="Sprite2D"]
+texture = ExtResource("1_wr5km")
+centered = false
+script = ExtResource("2_wr5km")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer"]
+
+[node name="Label" type="Label" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 607.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 42
+text = "You reached it..."
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 456.0
+offset_right = 527.0
+offset_bottom = 458.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CanvasGroup"]
+offset_left = 128.0
+offset_top = 482.0
+offset_right = 376.0
+offset_bottom = 592.0
+
+[node name="Button2" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("3_7hn8h")]
+layout_mode = 2
+text = "Leave elevator"
+
+[connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

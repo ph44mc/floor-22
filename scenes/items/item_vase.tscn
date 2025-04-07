@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://x1srrqbyie8n"]
+
+[ext_resource type="Texture2D" uid="uid://b5phaxdagbkp8" path="res://assets/items/vase.png" id="1_gyni4"]
+[ext_resource type="Script" uid="uid://bcp8xp1xhtc5f" path="res://scripts/item.gd" id="2_diphc"]
+
+[node name="Item" type="TextureRect"]
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.0297407
+anchor_right = 0.017
+anchor_bottom = 0.0297407
+offset_left = -32.64
+offset_top = -32.12
+offset_right = 31.36
+offset_bottom = 31.88
+pivot_offset = Vector2(32, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_gyni4")
+stretch_mode = 3
+script = ExtResource("2_diphc")
+item = "vase"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -8.0
+offset_top = -40.0
+offset_right = 72.0
+offset_bottom = -9.0
+focus_mode = 0
+text = "Remove"
+flat = true
+
+[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

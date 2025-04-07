@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3hpkf0oxdyd0"]
+
+[ext_resource type="Script" uid="uid://d5iet3m0bjbv" path="res://scripts/menu.gd" id="1_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://cq8ixddwkximl" path="res://assets/menu.png" id="1_con2f"]
+[ext_resource type="PackedScene" uid="uid://7oddtca3vwkj" path="res://scenes/button.tscn" id="2_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://ct1v7uj1ed2qu" path="res://assets/menu2.png" id="3_4ytvr"]
+[ext_resource type="AudioStream" uid="uid://bxinia3ca65mv" path="res://assets/menu.mp3" id="5_g3eks"]
+[ext_resource type="Texture2D" uid="uid://b35entc0bjc5u" path="res://assets/ending/ending2.png" id="6_i6lef"]
+[ext_resource type="Texture2D" uid="uid://yny4ogj2r5cu" path="res://assets/ending/ending1.png" id="7_70i5f"]
+[ext_resource type="Texture2D" uid="uid://bx2xtptmvl4on" path="res://assets/ending/ending3.png" id="8_mj5lg"]
+[ext_resource type="Texture2D" uid="uid://d4gp4s8canu51" path="res://assets/ending/ending5.png" id="9_70i5f"]
+[ext_resource type="Texture2D" uid="uid://ce7nf0md0eywg" path="res://assets/ending/ending4.png" id="10_mj5lg"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_4ytvr")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Menu" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, 28)
+texture = ExtResource("1_con2f")
+centered = false
+
+[node name="Menu2" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(1447, 535)
+scale = Vector2(1.29252, 1.29252)
+texture = ExtResource("3_4ytvr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup"]
+offset_left = 147.0
+offset_top = 623.0
+offset_right = 395.0
+offset_bottom = 773.0
+
+[node name="Button" parent="CanvasGroup/VBoxContainer" instance=ExtResource("2_mhnvy")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 47
+text = "Descend"
+
+[node name="Button2" parent="CanvasGroup/VBoxContainer" instance=ExtResource("2_mhnvy")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 47
+text = "Endings"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_g3eks")
+volume_db = -10.481
+pitch_scale = 0.75
+autoplay = true
+parameters/looping = true
+
+[node name="Ending" type="CanvasLayer" parent="."]
+layer = 5
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="Ending"]
+offset_left = -154.0
+offset_top = -157.0
+offset_right = 2125.0
+offset_bottom = 1215.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasGroup2" type="CanvasGroup" parent="."]
+visible = false
+
+[node name="Ending0" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(457.746, 365.078)
+scale = Vector2(1.54634, 1.54634)
+texture = ExtResource("6_i6lef")
+
+[node name="Ending1" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(969.746, 365.078)
+scale = Vector2(1.54634, 1.54634)
+texture = ExtResource("7_70i5f")
+
+[node name="Ending2" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(1481.75, 365.078)
+scale = Vector2(1.54634, 1.54634)
+texture = ExtResource("8_mj5lg")
+
+[node name="Ending3" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(705.746, 757.078)
+scale = Vector2(1.54634, 1.54634)
+texture = ExtResource("9_70i5f")
+
+[node name="Ending4" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(1265.75, 757.078)
+scale = Vector2(1.54634, 1.54634)
+texture = ExtResource("10_mj5lg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup2"]
+offset_left = 153.0
+offset_top = 909.0
+offset_right = 401.0
+offset_bottom = 1059.0
+
+[node name="ButtonBack" parent="CanvasGroup2/VBoxContainer" instance=ExtResource("2_mhnvy")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 47
+text = "Back"
+
+[connection signal="pressed" from="CanvasGroup/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasGroup/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasGroup2/VBoxContainer/ButtonBack" to="." method="_on_button_back_pressed"]
