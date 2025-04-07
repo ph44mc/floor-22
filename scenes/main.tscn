@@ -52,6 +52,38 @@ position = Vector2(960, 540)
 texture = ExtResource("3_tefeu")
 metadata/_edit_lock_ = true
 
+[node name="ColorRect3" type="ColorRect" parent="Elevator"]
+z_index = 1
+offset_left = -52.0
+offset_top = -497.0
+offset_right = -34.0
+offset_bottom = -238.0
+color = Color(0.0177324, 0.0177324, 0.0177324, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Elevator"]
+z_index = 1
+offset_left = 33.0
+offset_top = -497.0
+offset_right = 51.0
+offset_bottom = -238.0
+color = Color(0.0177324, 0.0177324, 0.0177324, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Elevator"]
+z_index = 1
+offset_left = -52.0
+offset_top = 324.0
+offset_right = -34.0
+offset_bottom = 583.0
+color = Color(0.0177324, 0.0177324, 0.0177324, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="Elevator"]
+z_index = 1
+offset_left = 33.0
+offset_top = 324.0
+offset_right = 51.0
+offset_bottom = 583.0
+color = Color(0.0177324, 0.0177324, 0.0177324, 1)
+
 [node name="22" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(960, 540)
@@ -64,14 +96,17 @@ position = Vector2(0, 44)
 texture = ExtResource("4_trceg")
 
 [node name="Floor" type="Label" parent="."]
-offset_left = 1268.0
+offset_left = 1286.0
 offset_top = 343.0
-offset_right = 1309.0
+offset_right = 1293.0
 offset_bottom = 400.0
 theme_override_colors/font_color = Color(0.971207, 0.857456, 0.40913, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 41
 text = "0"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

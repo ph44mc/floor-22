@@ -17,9 +17,10 @@ func _process(delta: float) -> void:
 			main.shakeLoop(7)
 			hideText($CanvasLayer/CanvasGroup/TextureProgressBar/Label)
 			$CanvasLayer/CanvasGroup/ButtonBH.visible = false
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.2).timeout
 			main._on_button_pressed()
 		if $CanvasLayer/CanvasGroup/TextureProgressBar.value <= 0:
+			blackhole = false
 			main.ending()
 			G.giveEnding(2)
 

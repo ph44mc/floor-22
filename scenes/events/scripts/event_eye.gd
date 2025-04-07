@@ -33,6 +33,8 @@ func _on_button_pressed() -> void:
 			$EventTable.visible = true
 			main.enableButton()
 			hideText()
+			G.spawnText("Success!",Vector2(get_viewport_rect().size[0]/2-20,get_viewport_rect().size[1]-140), 5, 25)
+		
 		else:
 			hideText()
 			showText($CanvasLayer2/CanvasGroup)

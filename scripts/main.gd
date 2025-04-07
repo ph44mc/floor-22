@@ -27,6 +27,12 @@ var events: Array = [
 func setBackground(bg_path: String = "res://assets/elevator.png"):
 	$Elevator.texture =  load(bg_path)
 
+func _process(delta: float) -> void:
+	$CanvasLayer/ItemCount.text = str($CanvasLayer/Items.get_child_count())+"/2"
+	if $CanvasLayer/Items.get_child_count()<=0:
+		$CanvasLayer/ItemCount.visible = false
+	else: $CanvasLayer/ItemCount.visible = true
+
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	if !debug: events.shuffle()
@@ -78,13 +84,16 @@ func openDoors():
 	tween.tween_property($leftDoor, "position", $leftDoor.position + Vector2(-140,0), 1.2)
 	tween.tween_property($rightDoor, "position", $rightDoor.position + Vector2(140,0), 1.2)
 	await get_tree().create_timer(1).timeout
-	if guest_floors==0:
-		if guest == "knife":
-			addItem("res://scenes/items/item_knife.tscn")
-			G.spawnText("Take this. It will help.",Vector2(get_viewport_rect().size[0]/2-145,get_viewport_rect().size[1]-140), 5, 25)
-		guest = "none"
-		canGuest = true
-		setBackground()
+	$leftDoor.position = Vector2(768.0-140,328.0)
+	$leftDoor.position = Vector2(1152.0+140,328.0)
+	if $Event.get_child(0).canLeave:
+		if guest_floors==0:
+			if guest == "knife":
+				addItem("res://scenes/items/item_knife.tscn")
+				G.spawnText("Take this. It will help.",Vector2(get_viewport_rect().size[0]/2-145,get_viewport_rect().size[1]-140), 5, 25)
+			guest = "none"
+			canGuest = true
+			setBackground()
 	shakeLoop(0.7)
 	
 func closeDoors():
@@ -93,6 +102,8 @@ func closeDoors():
 	tween.tween_property($leftDoor, "position", $leftDoor.position + Vector2(140,0), 1.2)
 	tween.tween_property($rightDoor, "position", $rightDoor.position + Vector2(-140,0), 1.2)
 	await get_tree().create_timer(1).timeout
+	$leftDoor.position = Vector2(768.0,328.0)
+	$leftDoor.position = Vector2(1152.0,328.0)
 	shakeLoop(0.7)
 	
 func nextEvent():
@@ -128,16 +139,13 @@ func nextEvent():
 		openDoors()
 	
 func addItem(item_path: String):
-	if $CanvasLayer/Items.get_child_count()<2:
-		var item = load(item_path).instantiate()
-		$CanvasLayer/Items.add_child(item)
-		$CanvasLayer/ItemCount.visible = true
-		$CanvasLayer/ItemCount.text = str($CanvasLayer/Items.get_child_count())+"/2"
-		return true
-	return false
+	if $CanvasLayer/Items.get_child_count()>=2:
+		$CanvasLayer/Items.get_child(0).queue_free()
+	var item = load(item_path).instantiate()
+	$CanvasLayer/Items.add_child(item)
+	return true
 	
 func removeItem(item):
-	$CanvasLayer/ItemCount.text = str($CanvasLayer/Items.get_child_count())+"/2"
 	if item is String:
 		for i in $CanvasLayer/Items.get_children():
 			if i.item == item:
@@ -145,8 +153,6 @@ func removeItem(item):
 	else:
 		item.queue_free()
 		await get_tree().create_timer(0.05).timeout
-	if $CanvasLayer/Items.get_child_count()<=0:
-		$CanvasLayer/ItemCount.visible = false
 	
 func hasItem(item: String):
 	for i in $CanvasLayer/Items.get_children():

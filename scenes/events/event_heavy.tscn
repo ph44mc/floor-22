@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://clkuhhyqppfia"]
+[gd_scene load_steps=6 format=3 uid="uid://clkuhhyqppfia"]
 
 [ext_resource type="Texture2D" uid="uid://dvpvnbmuwtx80" path="res://assets/events/event_heavy.png" id="1_ufv5a"]
 [ext_resource type="Script" uid="uid://dk4r7hidi1f1b" path="res://scenes/events/scripts/event_heavy.gd" id="2_ufv5a"]
 [ext_resource type="Texture2D" uid="uid://c1jdp6dqvd1dp" path="res://assets/events/event_base.png" id="3_vjii7"]
 [ext_resource type="PackedScene" uid="uid://7oddtca3vwkj" path="res://scenes/button.tscn" id="4_uybmn"]
+[ext_resource type="AudioStream" uid="uid://qqx70j3lwg67" path="res://assets/faling.mp3" id="5_52a67"]
 
 [node name="Event" type="Sprite2D"]
 texture = ExtResource("1_ufv5a")
@@ -57,7 +58,7 @@ text = "Let him in"
 [node name="Button2" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_uybmn")]
 layout_mode = 2
 text = "Try to explain that there is no 
-ㅤ more space for him (50% success)"
+more space for him (s% success)"
 
 [node name="Button4" parent="CanvasLayer/CanvasGroup/VBoxContainer" instance=ExtResource("4_uybmn")]
 layout_mode = 2
@@ -69,7 +70,8 @@ layout_mode = 2
 disabled = true
 text = "Threaten him with a knife (70% success)"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Faling" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_52a67")
 
 [connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/CanvasGroup/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

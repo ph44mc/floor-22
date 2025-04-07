@@ -1,6 +1,9 @@
 extends event
 
+var chance: float = 0.0
+
 func _process(delta: float) -> void:
+	if main.guest: chance = 0.25
 	if !main.canGuest: $CanvasLayer/CanvasGroup/VBoxContainer/Button.disabled = true
 	else: $CanvasLayer/CanvasGroup/VBoxContainer/Button.disabled = false
 	if main.hasItem("knife"): $CanvasLayer/CanvasGroup/VBoxContainer/Button3.disabled = false
@@ -8,15 +11,20 @@ func _process(delta: float) -> void:
 	if main.hasItem("cookies"): $CanvasLayer/CanvasGroup/VBoxContainer/Button4.disabled = false
 	else: $CanvasLayer/CanvasGroup/VBoxContainer/Button4.disabled = true
 	
+func onStart():
+	$CanvasLayer/CanvasGroup/VBoxContainer/Button2.text = "Try to explain that there is no 
+more space for him (%s " % ((0.5+chance)*100) + "% success)" 
+	
 func end():
 	main.closeDoors()
+	$Faling.play()
 	main.shake(7)
 	await get_tree().create_timer(1.5).timeout
 	main.shake(7)
-	await get_tree().create_timer(0.5).timeout
 	main.setBackground()
+	await get_tree().create_timer(0.5).timeout
 	main.shakeLoop(15)
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(5.5).timeout
 	main.shakeLoop(15)
 	await get_tree().create_timer(0.05).timeout
 	main.shake(40)
@@ -39,9 +47,10 @@ func _on_button_pressed() -> void:
 func _on_button_2_pressed() -> void:
 	if !chosen:
 		chosen = true
-		if randf() < 0.5:
+		if randf() < 0.5+ chance:
 			main.enableButton()
 			hideText()
+			G.spawnText("Success!",Vector2(get_viewport_rect().size[0]/2-20,get_viewport_rect().size[1]-140), 5, 25)
 		else:
 			main.canGuest = false
 			main.guest = "heavy"
@@ -57,6 +66,7 @@ func _on_button_3_pressed() -> void:
 		if randf() < 0.7:
 			main.enableButton()
 			hideText()
+			G.spawnText("Success!",Vector2(get_viewport_rect().size[0]/2-20,get_viewport_rect().size[1]-140), 5, 25)
 		else:
 			main.canGuest = false
 			main.guest = "heavy"
@@ -68,6 +78,7 @@ func _on_button_3_pressed() -> void:
 
 func _on_button_4_pressed() -> void:
 	if !chosen:
+		main.removeItem("cookies")
 		chosen = true
 		main.enableButton()
 		hideText()
